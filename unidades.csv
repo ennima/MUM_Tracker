@@ -1,0 +1,13 @@
+id,nombre,descripcion,status,lugar,hora_entrada,hora_salida
+0,"Fly 1","BLA BLA",Disponible,"Milenio CDMX",,
+1,"Fly 2","Bla bla",Asignado,Oaxaca,NULL,NULL
+2,"Fly 3",NULL,NULL,NULL,NULL,NULL
+3,"LiveU 1",NULL,NULL,NULL,NULL,NULL
+4,"LiveU 2",NULL,NULL,NULL,NULL,NULL
+5,"LiveU 3",NULL,NULL,NULL,NULL,NULL
+6,"LiveU 4",NULL,NULL,NULL,NULL,NULL
+7,"LiveU 5",NULL,NULL,NULL,NULL,NULL
+8,"LiveU 6",NULL,NULL,NULL,NULL,NULL
+9,"LiveU 7",NULL,NULL,NULL,NULL,NULL
+10,"LiveU 8",NULL,NULL,NULL,NULL,NULL
+NULL,"LiveU 9",NULL,NULL,NULL,NULL,NULL
