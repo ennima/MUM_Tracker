@@ -56,7 +56,19 @@ router.post('/', function(req, res, next) {
   	console.log(keys[i]);
   }
   cors(res);
-  res.send("algo");
+  res.json({data:"algo"});
+});
+
+router.post('/status', function(req, res, next) {
+  console.log(Object.keys(req.body));
+  var keys = Object.keys(req.body);
+  console.log("Existe desc: "+keys.indexOf('descripcion'));
+  console.log("Existe status: "+keys.indexOf('status'));
+  for(var i = 0; i < keys.length; i++){
+    console.log(keys[i]);
+  }
+  cors(res);
+  res.json({data:"Status"});
 });
 
 module.exports = router;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Milenio Live U Info</title>
+</head>
+<body>
+	
+	<table id="tabla_content"></table>
+
+	<div id="log"></div>
+	<script src="./js/jquery-3.2.1.min.js"></script>
+	<script src="./js/get_milenio_lus.js"></script>
+	<script>
+		$(document).ready(function(){
+			console.log("loading content..");
+			$("#tabla_content").load("lu-central.html",function(responseTxt, statusTxt, xhr){
+			  			if(statusTxt == "success"){
+			                alert("External content loaded successfully!");
+			                get_lus_mil();
+			  			}
+			            if(statusTxt == "error")
+			                alert("Error: " + xhr.status + ": " + xhr.statusText);
+			});
+		   
+		});
+	</script>
+	
+	
+</body>
+</html>
