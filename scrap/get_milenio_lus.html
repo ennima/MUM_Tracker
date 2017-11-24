@@ -3,21 +3,96 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Milenio Live U Info</title>
+	<style>
+		body{
+			font-family: sans-serif;
+		}
+		#container{
+			width: 444px;
+		    background: #f7f7f7;
+		    text-align: center;
+		    padding-bottom: 5px;
+		}
+		#container #cabeza{
+			background: #ab3f3f;
+		    padding-top: 10px;
+		    padding-bottom: 10px;
+		}
+		#container #cabeza h3{
+			background: #ab3f3f;
+		    margin: 0px;
+		    color: #fff;
+		}
+		#container #cabeza p{
+			background: #ab3f3f;
+			color:#dde5e8;
+			margin: 0px;
+		}
+		.danger{
+			color:#e24242;
+		}
+		.warning{
+			color:#e49e47;
+		}
+		ul{
+			width: 29%;
+    		margin-left: 25%;
+		}
+		
+		ul li{
+			/*text-align: center;*/
+			font-weight: bold;
+		}
+		#foot{
+			background: #fff;
+			color:#777;
+		}
+	</style>
 </head>
 <body>
 	
 	<table id="tabla_content"></table>
-
-	<div id="log"></div>
+	<div id="container">
+		<div id="cabeza">
+		<h3>Estos son los datos actuales: <span id="head"></span></h3>
+		<p>LiveU - Consumo</p>
+		</div>
+		<div id="log"></div>
+	</div>
+	<div id="foot">&nbsp;<p>Saludos cordiales.</p></div>
 	<script src="./js/jquery-3.2.1.min.js"></script>
 	<script src="./js/get_milenio_lus.js"></script>
 	<script>
+		var lus_mil_list;
+		var danger_min = 90;
+		var warning_min = 79;
+		var warning_max = danger_min - 1;
 		$(document).ready(function(){
 			console.log("loading content..");
+			$("#head").html(fechaHoy());
 			$("#tabla_content").load("lu-central.html",function(responseTxt, statusTxt, xhr){
 			  			if(statusTxt == "success"){
-			                alert("External content loaded successfully!");
-			                get_lus_mil();
+			                // alert("External content loaded successfully!");
+			                lus_mil_list = get_lus_mil();
+			                let list_callado = "<ul>";
+			                lus_mil_list.forEach(function(item, key){
+			                	// console.log(item);
+			                	if(item.uso == ""){
+			                		list_callado += "<li>"+item.nickname +":  ---"+"</li>";
+			                	}else if(item.uso > danger_min){
+			                		list_callado += "<li class='danger'>"+item.nickname +":  "+ item.uso +"%"+"</li>";
+			                	}else if(between(item.uso, warning_min, warning_max)){
+			                		list_callado += "<li class='warning'>"+item.nickname +":  "+ item.uso +"%"+"</li>";
+			                	}
+			                	else{
+			                		list_callado += "<li>"+item.nickname +":  "+ item.uso +"%"+"</li>";
+			                	}
+			                	
+			                	console.log(list_callado)
+			                });
+			                list_callado += "</ul>"
+			                $("#log").html(list_callado);
+			                $("#tabla_content").hide();
 			  			}
 			            if(statusTxt == "error")
 			                alert("Error: " + xhr.status + ": " + xhr.statusText);

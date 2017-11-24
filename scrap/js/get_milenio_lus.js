@@ -1,3 +1,17 @@
+function between(x, min, max) {
+  return x >= min && x <= max;
+}
+
+function fechaHoy(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+    var hoy = (day) + "/" + (month) + "/" + now.getFullYear();
+    // document.write(today);
+    return hoy;
+}
+
 function get_lus_mil()
 {
     
@@ -42,7 +56,7 @@ function get_lus_mil()
         let lu_serial_part =item_split[0].split("-")[1];
         let lu_mil = {
                       "number":lu_number
-                      ,"nickname": "Milenio "+lu_number
+                      ,"nickname": "Milenio"+lu_number
                       ,"serial_part":lu_serial_part
                       ,"nombre": item.nombre
                       ,"modelo": item.type
@@ -62,4 +76,5 @@ function get_lus_mil()
 
     let sort_lus_mil = lus_mil.sort(compare_lu_number);
     console.log(sort_lus_mil);
+    return sort_lus_mil;
 }
