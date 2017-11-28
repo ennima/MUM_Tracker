@@ -8,6 +8,7 @@
  * @description Inline editor for HTML tables compatible with Bootstrap
  * @version 1.2.3
  * @author Celso Marques
+ * @tuned Enrique Nieto Martínez
  */
 var change_class_timeout = 1000;
 var change_class_timeout_animation = 1000;
