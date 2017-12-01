@@ -1,8 +1,8 @@
 
-var permisos = "SL"
-
-
-
+var permisos = "V"
+var poll_active = true
+var table_visible = true
+var animation_smooth = 200
 
 on_view_evt = function(){
     console.log("On view overrr");
@@ -12,7 +12,7 @@ on_view_evt = function(){
 
 var seconds = 0,
     t,
-    poll_time_seconds = 5,
+    poll_time_seconds = 15,
     show_timer_log = true;
 
 function timer_log()
@@ -33,7 +33,26 @@ function add() {
     
     if(seconds >= poll_time_seconds){
     	console.log("Imprime Data")
+    	if(table_visible){
+		$('#lu_table tbody').fadeOut( animation_smooth )
+		
+		// setTimeout(
+		//   function() 
+		//   {
+		//     //do something special
+		//     // $('#lu_table tbody').html("")
+		//     console.log("end delay")
+		//   }, 1000);
+		
+		table_visible = false
+	}
     	load_table_info()
+
+    if(table_visible == false){
+			$('#lu_table tbody').slideUp( animation_smooth ).delay( animation_smooth*2 ).fadeIn( animation_smooth )
+			table_visible = true
+	}
+
     	seconds = 0
     }
 
@@ -50,8 +69,10 @@ function timer() {
 }
 
 function start() {
-    timer();
-}
+	if (poll_active) {
+		timer();
+	}
+ }
 
 function stop() {
     clearTimeout(t);
@@ -67,10 +88,12 @@ load_table_info()
 start()
 
 function load_table_info(){
-	$('#lu_table tbody').html("")
+	
+	
 	$.get("http://127.0.0.1:3000/unidades", function(data, status){
 		// console.log("Data: " + data + "\nStatus: " + status);
 		// console.log(data)
+		$('#lu_table tbody').html("")
 		for(let i= 0; i < data.rows.length ; i++)
 		{
 			console.log(data.rows[i])
@@ -78,12 +101,13 @@ function load_table_info(){
 			    .append($('<td style="display: none;">').append(data.rows[i].id))
 			    .append($('<td>').append(data.rows[i].nombre))
 			    .append($('<td class="hidden-xs-down not-visible">').append(data.rows[i].descripcion))
-			    .append($('<td>').append(data.rows[i].status))
+			    .append($('<td class="'+data.rows[i].status+'">').append(data.rows[i].status))
 			    .append($('<td>').append(data.rows[i].lugar))
 			    .append($('<td class="hidden-xs-down not-visible">').append(data.rows[i].horario_txt))
 			  )
 		}
 		load_status_catalog()
+			
 	});
 
 }

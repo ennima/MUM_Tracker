@@ -1,0 +1,9 @@
+curl -v -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "param1=value1&param2=value2" http://localhost:3000/usuarios/login
+
+
+curl -v -X POST http://localhost:3000/usuarios/login
+
+
+curl -v -H "Content-Type: application/json" -X POST -d {\"username\":\"mkyong\",\"password\":\"abc\"} http://localhost:3000/usuarios/login
+
+curl -H "Content-Type: application/json" -X POST -d {\"username\":\"mkyong\",\"password\":\"abc\"} http://localhost:3000/usuarios/login
